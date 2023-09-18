@@ -10,7 +10,6 @@ class GameManager extends Component with HasGameRef<BounceBoll> {
   GameState state = GameState.intro;
 
   bool get isPlaying => state == GameState.playing;
-  bool get isPouse => state == GameState.pouse;
   bool get isGameOver => state == GameState.gameOver;
   bool get isIntro => state == GameState.intro;
 
@@ -24,4 +23,4 @@ class GameManager extends Component with HasGameRef<BounceBoll> {
   }
 }
 
-enum GameState { intro, playing, pouse, gameOver }
+enum GameState { intro, playing, gameOver }

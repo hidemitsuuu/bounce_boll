@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../bounce_boll.dart';
 import 'widgets.dart';
 
-class GameOverlay extends StatelessWidget {
+class GameOverlay extends HookWidget {
   const GameOverlay(this.game, {super.key});
 
   final BounceBoll game;
 
   @override
   Widget build(BuildContext context) {
+    final isPaused = useState(false);
+
     return Material(
       color: Theme.of(context).colorScheme.background,
       child: SafeArea(
@@ -22,7 +25,7 @@ class GameOverlay extends StatelessWidget {
                 children: [
                   ScoreDisplay(game: game),
                   ElevatedButton(
-                    child: game.gameManager.isPouse
+                    child: isPaused.value
                         ? const Icon(
                             Icons.play_arrow,
                             size: 48,
@@ -31,12 +34,15 @@ class GameOverlay extends StatelessWidget {
                             Icons.pause,
                             size: 48,
                           ),
-                    onPressed: () => game.togglePauseState(),
+                    onPressed: () {
+                      game.togglePauseState();
+                      isPaused.value = !isPaused.value;
+                    },
                   ),
                 ],
               ),
             ),
-            if (game.gameManager.isPouse)
+            if (isPaused.value)
               const Expanded(
                 child: Icon(
                   Icons.pause_circle,

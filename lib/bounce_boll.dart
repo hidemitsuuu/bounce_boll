@@ -97,10 +97,8 @@ class BounceBoll extends FlameGame
   void togglePauseState() {
     if (paused) {
       resumeEngine();
-      gameManager.state = GameState.pouse;
     } else {
       pauseEngine();
-      gameManager.state = GameState.playing;
     }
   }
 
