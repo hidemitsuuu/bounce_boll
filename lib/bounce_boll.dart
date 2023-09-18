@@ -12,17 +12,13 @@ class BounceBoll extends FlameGame
   // LevelManager levelManager = LevelManager();
   GameManager gameManager = GameManager();
   // int screenBufferSpace = 300;
-  // ObjectManager objectManager = ObjectManager();
+  ObstacleManager obstacleManager = ObstacleManager();
 
   @override
   Future<void> onLoad() async {
-    // await add(_world);
-
     await add(gameManager);
 
     overlays.add('gameOverlay');
-
-    // await add(levelManager);
   }
 
   @override
@@ -36,14 +32,6 @@ class BounceBoll extends FlameGame
 
     if (gameManager.isPlaying) {
       checkLevelUp();
-
-      // final Rect worldBounds = Rect.fromLTRB(
-      //   0,
-      //   camera.position.y - screenBufferSpace,
-      //   camera.gameSize.x,
-      //   camera.position.y + _world.size.y,
-      // );
-      // camera.worldBounds = worldBounds;
     }
   }
 
@@ -53,34 +41,15 @@ class BounceBoll extends FlameGame
   }
 
   void initializeGameStart() {
-    // setCharacter();
-
     gameManager.reset();
 
-    // if (children.contains(objectManager)) objectManager.removeFromParent();
+    if (children.contains(obstacleManager)) obstacleManager.removeFromParent();
 
-    // levelManager.reset();
+    obstacleManager = ObstacleManager();
 
-    // player.reset();
-    // camera.worldBounds = Rect.fromLTRB(
-    //   0,
-    //   -_world.size.y,
-    //   camera.gameSize.x,
-    //   _world.size.y + screenBufferSpace,
-    // );
-    // camera.followComponent(player);
+    add(obstacleManager);
 
-    // player.resetPosition();
-
-    // // Add a Player to the game: Reset Dash's position back to the start
-
-    // objectManager = ObjectManager(
-    //     minVerticalDistanceToNextPlatform: levelManager.minDistance,
-    //     maxVerticalDistanceToNextPlatform: levelManager.maxDistance);
-
-    // add(objectManager);
-
-    // objectManager.configure(levelManager.level, levelManager.difficulty);
+    // obstacleManager.configure(levelManager.level, levelManager.difficulty);
   }
 
   void startGame() {
